@@ -7,13 +7,17 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
 
+
+    // changes nessesary for google maps api: https://github.com/huafu/ember-google-map/wiki/Configuration#configuring-your-content-security-policy
+    // TODO investigate which lines are actually neccessary as we are using leaflet, 
+    //  -> further reading: https://github.com/rwjblue/ember-cli-content-security-policy/issues/4#issuecomment-57793050
     contentSecurityPolicy: {
-      'default-src': "'none'",
-      'script-src': "'self'",
-      'font-src': "'self'",
-      'connect-src': "'self'",
-      'img-src': "'self' data: *.tiles.mapbox.com",
-      'style-src': "'self' 'unsafe-inline'",
+      'default-src': "'none' ",
+      'script-src': "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com",
+      'font-src': "'self' fonts.gstatic.com",
+      'connect-src': "'self' maps.gstatic.com",
+      'img-src': "'self' data: *.tiles.mapbox.com *.googleapis.com maps.gstatic.com csi.gstatic.com",
+      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com",
       'media-src': "'self'"
     },
     EmberENV: {
